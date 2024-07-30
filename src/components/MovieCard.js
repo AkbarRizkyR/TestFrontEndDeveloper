@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import imdbLogo from '../assets/icons/imdb.svg';
 
+
+// Styled component untuk Card
 const Card = styled.div`
   border: 1px solid #ddd;
   border-radius: 12px; 
@@ -11,40 +13,45 @@ const Card = styled.div`
   background-color: #f9f9f9; 
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
   transition: transform 0.3s, box-shadow 0.3s; 
-
   &:hover {
     transform: scale(1.1); 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
   }
-
   @media (max-width: 768px) {
     width: 160px;
     padding: 16px;
     margin: 16px;
   }
 
+
   @media (max-width: 480px) {
     width: 130px;
     padding: 12px;
     margin: 12px;
   }
+
 `;
 
+// Styled component untuk gambar film
 const MovieImage = styled.img`
+
   width: 100%;
   height: auto;
   border-radius: 8px; 
   margin-bottom: 12px; 
+
 `;
 
+// Styled component untuk judul film
+
 const MovieTitle = styled.h3`
+
   margin: 12px 0; 
   font-size: 1.4rem; 
   color: #222; 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
   @media (max-width: 768px) {
     font-size: 1.2rem;
   }
@@ -54,10 +61,13 @@ const MovieTitle = styled.h3`
   }
 `;
 
+// Styled component untuk informasi film
 const MovieInfo = styled.p`
+
   margin: 6px 0; 
   font-size: 1rem; 
   color: #666; 
+
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
@@ -66,28 +76,43 @@ const MovieInfo = styled.p`
   @media (max-width: 480px) {
     font-size: 0.8rem;
   }
+
 `;
 
+// Styled component untuk container rating
+
 const RatingContainer = styled.div`
+
   display: flex;
   align-items: center;
   justify-content: center; 
   margin-bottom: 1.2rem; 
+
 `;
+
+// Styled component untuk logo IMDb
 
 const IMDbLogo = styled.img`
+
   height: 24px; 
   margin-right: 12px; 
+
 `;
 
+// Styled component untuk rating
+
 const Rating = styled.span`
+
   font-family: 'Inter', sans-serif;
   font-weight: bold;
   font-size: 20px; 
   color: #ffcc00; 
+
 `;
 
+// Komponen MovieCard
 const MovieCard = ({ movie }) => {
+
     return (
         <Card>
             <MovieImage
@@ -103,5 +128,6 @@ const MovieCard = ({ movie }) => {
         </Card>
     );
 };
+
 
 export default MovieCard;

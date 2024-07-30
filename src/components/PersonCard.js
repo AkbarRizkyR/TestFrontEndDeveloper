@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// Styled component for the card container
 const Card = styled.div`
   border: 1px solid #ddd;
   border-radius: 12px; 
@@ -30,6 +31,7 @@ const Card = styled.div`
   }
 `;
 
+// Styled component for the avatar image
 const Avatar = styled.img`
   border-radius: 50%;
   width: 100px;
@@ -38,23 +40,27 @@ const Avatar = styled.img`
   margin-bottom: 16px;
 `;
 
+// Styled component for the person's name
 const Name = styled.h3`
   margin: 0;
   font-size: 1.2em;
 `;
 
+// Styled component for the list of known movies
 const KnownForList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 8px 0;
 `;
 
+// Styled component for each movie item
 const KnownForItem = styled.li`
   margin: 4px 0;
   font-size: 0.9em;
   color: #555;
 `;
 
+// PersonCard component to display person's information
 const PersonCard = ({ person }) => {
   return (
     <Card>
@@ -69,4 +75,5 @@ const PersonCard = ({ person }) => {
   );
 };
 
+// Exporting the PersonCard component
 export default PersonCard;

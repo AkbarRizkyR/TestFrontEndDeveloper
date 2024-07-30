@@ -4,6 +4,7 @@ import { getPeople } from '../api/api'; // Asumsi API ini ada
 import PersonCard from './PersonCard'; // Import PersonCard
 import { FaCircleArrowLeft, FaCircleArrowRight } from 'react-icons/fa6'; // Import icon
 
+// Styled component untuk judul
 const Title = styled.h1`
   text-align: center;
   color: #333;
@@ -14,6 +15,7 @@ const Title = styled.h1`
   align-items: center;
 `;
 
+// Styled component untuk container slider
 const SliderContainer = styled.div`
   display: flex;
   overflow-x: scroll;
@@ -25,6 +27,7 @@ const SliderContainer = styled.div`
   }
 `;
 
+// Styled component untuk setiap slide
 const Slide = styled.div`
   flex: 0 0 auto;
   width: 25%;
@@ -40,6 +43,7 @@ const Slide = styled.div`
   }
 `;
 
+// Styled component untuk panah navigasi
 const Arrow = styled.div`
   cursor: pointer;
   font-size: 2rem;
@@ -48,49 +52,51 @@ const Arrow = styled.div`
 `;
 
 const People = () => {
-    const [people, setPeople] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const sliderRef = useRef(null); // Tambahkan useRef
+    const [people, setPeople] = useState([]); // State untuk menyimpan data people
+    const [loading, setLoading] = useState(true); // State untuk loading
+    const [error, setError] = useState(null); // State untuk error
+    const sliderRef = useRef(null); // Tambahkan useRef untuk referensi slider
 
     useEffect(() => {
         const fetchPeople = async () => {
             try {
-                const data = await getPeople();
-                setPeople(data);
+                const data = await getPeople(); // Panggil API untuk mendapatkan data people
+                setPeople(data); // Set data people ke state
             } catch (err) {
-                setError(err.message);
+                setError(err.message); // Set error jika ada
             } finally {
-                setLoading(false);
+                setLoading(false); // Set loading ke false setelah data diambil
             }
         };
-        fetchPeople();
+        fetchPeople(); // Panggil fungsi fetchPeople saat komponen mount
     }, []);
 
+    // Fungsi untuk scroll ke kiri
     const scrollLeft = () => {
         if (sliderRef.current) {
             sliderRef.current.scrollBy({ left: -300, behavior: 'smooth' });
         }
     };
 
+    // Fungsi untuk scroll ke kanan
     const scrollRight = () => {
         if (sliderRef.current) {
             sliderRef.current.scrollBy({ left: 300, behavior: 'smooth' });
         }
     };
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
+    if (loading) return <p>Loading...</p>; // Tampilkan loading jika data sedang diambil
+    if (error) return <p>Error: {error}</p>; // Tampilkan error jika ada
 
     return (
         <>
-            <Title>Featured Casts</Title>
+            <Title>Featured Casts</Title> {/* Judul */}
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Arrow onClick={scrollLeft}><FaCircleArrowLeft /></Arrow> {/* Gunakan icon FaCircleArrowLeft */}
-                <SliderContainer ref={sliderRef}> {/* Gunakan ref */}
+                <SliderContainer ref={sliderRef}> {/* Gunakan ref untuk slider */}
                     {people.map(person => (
                         <Slide key={person.id}>
-                            <PersonCard person={person} />
+                            <PersonCard person={person} /> {/* Tampilkan PersonCard untuk setiap person */}
                         </Slide>
                     ))}
                 </SliderContainer>

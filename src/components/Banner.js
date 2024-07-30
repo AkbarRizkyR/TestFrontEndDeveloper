@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { getMovieList } from "../api/api";
 import imdbLogo from '../assets/icons/imdb.svg';
 
+// Komponen styled untuk membungkus banner
 const BannerWrapper = styled.div`
   position: relative;
   width: 100%;
@@ -20,11 +21,12 @@ const BannerWrapper = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); // Anda bisa menyesuaikan nilai opacity di sini
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
 `;
 
+// Komponen styled untuk overlay
 const Overlay = styled.div`
   display: flex;
   flex-direction: column;
@@ -38,6 +40,7 @@ const Overlay = styled.div`
   z-index: 2;
 `;
 
+// Komponen styled untuk konten
 const Content = styled.div`
   max-width: 50%;
   margin-left: 5rem;
@@ -45,6 +48,7 @@ const Content = styled.div`
   text-align: left;
 `;
 
+// Komponen styled untuk judul
 const Title = styled.h1`
   font-family: 'Inter', sans-serif;
   font-weight: bold;
@@ -59,6 +63,7 @@ const Title = styled.h1`
   }
 `;
 
+// Komponen styled untuk deskripsi
 const Description = styled.p`
   font-family: 'Inter', sans-serif;
   font-size: 12px;
@@ -77,6 +82,7 @@ const Description = styled.p`
   }
 `;
 
+// Komponen styled untuk kontainer tombol
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -88,17 +94,21 @@ const ButtonContainer = styled.div`
     flex-direction: row;
   }
 `;
+
+// Komponen styled untuk kontainer rating
 const RatingContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
 `;
 
+// Komponen styled untuk logo IMDb
 const IMDbLogo = styled.img`
   height: 20px;
   margin-right: 10px;
 `;
 
+// Komponen styled untuk rating
 const Rating = styled.span`
   font-family: 'Inter', sans-serif;
   font-weight: bold;
@@ -106,26 +116,29 @@ const Rating = styled.span`
   color: #ffd700;
 `;
 
+// Komponen utama Banner
 const Banner = () => {
-    const [movies, setMovies] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [movies, setMovies] = useState([]); // State untuk menyimpan daftar film
+    const [currentIndex, setCurrentIndex] = useState(0); // State untuk menyimpan indeks film saat ini
 
+    // Mengambil daftar film dari API saat komponen pertama kali dimuat
     useEffect(() => {
         const fetchMovies = async () => {
             const movieList = await getMovieList();
-            setMovies(movieList.slice(0, 5));
+            setMovies(movieList.slice(0, 5)); // Menyimpan 5 film pertama
         };
         fetchMovies();
     }, []);
 
+    // Mengatur interval untuk mengganti film setiap 5 detik
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % movies.length);
         }, 5000);
-        return () => clearInterval(interval);
+        return () => clearInterval(interval); // Membersihkan interval saat komponen di-unmount
     }, [movies]);
 
-    const currentMovie = movies[currentIndex];
+    const currentMovie = movies[currentIndex]; // Mendapatkan film saat ini berdasarkan indeks
 
     return (
         <BannerWrapper $backgroundImage={`https://image.tmdb.org/t/p/original${currentMovie?.poster_path}`}>
